@@ -1,0 +1,4 @@
+<div [formGroup]="productForm">
+  <product-form [productForm]="productForm" [categoryList]="category" [supplierList]="supplier" (sendProduct)="addProduct($event)"></product-form>
+</div>
+

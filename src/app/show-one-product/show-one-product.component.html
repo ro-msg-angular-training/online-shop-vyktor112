@@ -1,0 +1,10 @@
+<ng-container *ngIf="!detailedProduct" >
+  <p>Invalid product</p>
+</ng-container>
+
+<ng-container *ngIf="detailedProduct" >
+  <button (click)="deleteProduct()" class="btn btn-secondary">Delete</button>
+  <button (click)="editProduct()" class="btn btn-primary">Edit</button>
+  <div>{{productId}}</div>
+  <div>{{detailedProduct.name}}</div>
+</ng-container>
