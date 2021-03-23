@@ -4,20 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ShowAllProductsComponent } from './show-all-products/show-all-products.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ShowOneProductComponent } from './show-one-product/show-one-product.component';
 import {HttpClientModule} from '@angular/common/http';
-import { EditOneProductComponent } from './edit-one-product/edit-one-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatOptionModule} from '@angular/material/core';
-import { AddOneProductComponent } from './add-one-product/add-one-product.component';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { SmartCreateProductComponent } from './smart-create-product/smart-create-product.component';
+import { SmartEditProductComponent } from './smart-edit-product/smart-edit-product.component';
+import { StoreModule} from "@ngrx/store";
+import {ProductEffects} from "./store/effects/product.effects";
+import {EffectsModule} from "@ngrx/effects";
+import {StoreRouterConnectingModule} from "@ngrx/router-store";
+import {ProductService} from "../services/product.services";
+import {appReducers} from "./store/reducers/app.reducer";
 
 
 @NgModule({
@@ -25,9 +32,10 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     ShowAllProductsComponent,
     ShowOneProductComponent,
-    EditOneProductComponent,
     PageNotFoundComponent,
-    AddOneProductComponent
+    ProductFormComponent,
+    SmartCreateProductComponent,
+    SmartEditProductComponent
   ],
   imports: [
     BrowserModule,
@@ -35,13 +43,17 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([ProductEffects]),
+    StoreRouterConnectingModule.forRoot({stateKey:'router'}),
     NoopAnimationsModule,
     MatSliderModule,
     MatOptionModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

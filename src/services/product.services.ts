@@ -1,9 +1,9 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {Product} from '../app/model/product.model';
+import {Product} from '../app/store/state/product.state';
 import {Injectable} from '@angular/core';
 import {catchError} from 'rxjs/operators';
-import {Result} from '../app/model/result.model';
+import {Result} from '../app/store/state/result.state';
 
 @Injectable({
   providedIn:  'root'
@@ -36,7 +36,6 @@ export class ProductService{
   }
 
    deleteProduct(id: string): Observable<Result>{
-      console.log('am intrat aici', id);
       return  this.http.delete<Result>(this.REST_API_SERVER + `/${id}`).pipe(catchError(this.handleError));
   }
   editOneProduct(id: string, body: Product): Observable<Product>{
@@ -44,7 +43,6 @@ export class ProductService{
   }
 
   addOneProduct(body: Product): Observable<Product>{
-    console.log(body);
     return this.http.post<Product>(this.REST_API_SERVER, body).pipe(catchError(this.handleError));
   }
 }

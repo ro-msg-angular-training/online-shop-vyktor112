@@ -1,0 +1,4 @@
+<div [formGroup]="productForm">
+  <product-form *ngIf="product" [productForm]="productForm" [categoryList]="category" [supplierList]="supplier" (sendProduct)="editProduct($event)"></product-form>
+</div>
+

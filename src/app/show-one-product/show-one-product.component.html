@@ -1,10 +1,10 @@
-<ng-container *ngIf="!product" >
+<ng-container *ngIf="!detailedProduct" >
   <p>Invalid product</p>
 </ng-container>
 
-<ng-container *ngIf="product" >
+<ng-container *ngIf="detailedProduct" >
   <button (click)="deleteProduct()" class="btn btn-secondary">Delete</button>
   <button (click)="editProduct()" class="btn btn-primary">Edit</button>
   <div>{{productId}}</div>
-  <div>{{product.name}}</div>
+  <div>{{detailedProduct.name}}</div>
 </ng-container>

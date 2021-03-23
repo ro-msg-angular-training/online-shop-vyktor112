@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+
+
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'angular-frontend-project';
-  name = 'Tato';
+  constructor(private store: Store<any>) {}
+
+  ngOnInit(){
+
+  }
 }

@@ -1,21 +1,25 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {ProductService} from '../../services/product.services';
-import {Product} from '../model/product.model';
+
+import {Product} from '../store/state/product.state';
+import {select, Store} from "@ngrx/store";
+import {GetAllProducts} from "../store/actions/product.actions";
+import {selectProductList} from "../store/selectors/product.selectors";
+import {AppState} from "../store/state/app.state";
+
 
 @Component({
   selector: 'app-show-all-products',
-  templateUrl: './show-all-products.component.html',
-  styleUrls: ['./show-all-products.component.css']
+  templateUrl: './show-all-products.component.html'
 })
 export class ShowAllProductsComponent implements OnInit{
 
-  listProducts: Product[] = [];
+  products$ = this.store.pipe(select(selectProductList));
 
-  constructor(private router: Router, private productService: ProductService) { }
+  constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((data) => this.listProducts = data);
+    this.store.dispatch(new GetAllProducts())
   }
 
 
